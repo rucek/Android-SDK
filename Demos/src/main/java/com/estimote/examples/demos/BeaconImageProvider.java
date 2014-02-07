@@ -6,7 +6,7 @@ import com.estimote.sdk.Beacon;
 
 public class BeaconImageProvider {
 
-    public Bitmap getBitmapForBeacon(Beacon beacon) {
+    public static Bitmap getBitmapForBeacon(Beacon beacon) {
         return null;
     }
 
