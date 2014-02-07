@@ -1,31 +1,42 @@
 buildscript {
-  repositories {
-    mavenCentral()
-  }
-  dependencies {
-    classpath 'com.android.tools.build:gradle:0.8.+'
-  }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.8.+'
+    }
 }
 apply plugin: 'android'
 
 repositories {
-  mavenCentral()
+    mavenCentral()
 }
 
 android {
-  compileSdkVersion 19
-  buildToolsVersion "19.0.1"
+    compileSdkVersion 19
+    buildToolsVersion "19.0.1"
 
-  defaultConfig {
-    minSdkVersion 18
-    targetSdkVersion 18
-  }
+    defaultConfig {
+        minSdkVersion 18
+        targetSdkVersion 18
+    }
+
+    packagingOptions {
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/notice.txt'
+    }
 }
 
 dependencies {
-  compile files('../EstimoteSDK/estimote-sdk-preview.jar', '../EstimoteSDK/guava-15.0.jar')
+    compile files('../EstimoteSDK/estimote-sdk-preview.jar', '../EstimoteSDK/guava-15.0.jar')
+    compile 'com.android.support:appcompat-v7:+'
+    compile 'org.springframework.android:spring-android-rest-template:1.0.1.RELEASE'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.3.0'
 }
 
 task wrapper(type: Wrapper) {
-  gradleVersion = '1.8'
+    gradleVersion = '1.8'
 }
