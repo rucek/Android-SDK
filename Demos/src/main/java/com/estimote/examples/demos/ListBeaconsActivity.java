@@ -93,9 +93,8 @@ public class ListBeaconsActivity extends Activity {
             // new beacon
             this.beacons.put(beaconId, firstBeacon);
             // call provider
-            String url = BeaconImageProvider.getBitmapForBeacon(firstBeacon);
             Intent i = new Intent(this, DisplayImageActivity.class);
-            i.putExtra("url", url);
+            i.putExtra("major", firstBeacon.getMajor());
             startActivity(i);
         }
     }
