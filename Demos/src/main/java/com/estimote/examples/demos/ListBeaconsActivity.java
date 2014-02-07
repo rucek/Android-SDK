@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -92,6 +93,10 @@ public class ListBeaconsActivity extends Activity {
             // new beacon
             this.beacons.put(beaconId, firstBeacon);
             // call provider
+            String url = BeaconImageProvider.getBitmapForBeacon(firstBeacon);
+            Intent i = new Intent(this, DisplayImageActivity.class);
+            i.putExtra("url", url);
+            startActivity(i);
         }
     }
 
