@@ -19,7 +19,9 @@ import com.estimote.sdk.utils.L;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Displays list of found beacons sorted by RSSI.
@@ -30,6 +32,7 @@ import java.util.List;
 public class ListBeaconsActivity extends Activity {
 
   private static final String TAG = ListBeaconsActivity.class.getSimpleName();
+  private static Map<UniqueBeaconId, Beacon> beacons = new HashMap<UniqueBeaconId, Beacon>();
 
   public static final String EXTRAS_TARGET_ACTIVITY = "extrasTargetActivity";
   public static final String EXTRAS_BEACON = "extrasBeacon";
@@ -66,8 +69,11 @@ public class ListBeaconsActivity extends Activity {
         runOnUiThread(new Runnable() {
           @Override
           public void run() {
+
             List<Beacon> estimoteBeacons = filterBeacons(beacons);
+            if (!beacons.isEmpty()) processBeacons(beacons);
             getActionBar().setSubtitle("Found beacons: " + estimoteBeacons.size());
+
             adapter.replaceWith(estimoteBeacons);
           }
         });
@@ -78,6 +84,16 @@ public class ListBeaconsActivity extends Activity {
   private List<Beacon> filterBeacons(List<Beacon> beacons) {
       return beacons;
   }
+
+    private void processBeacons(List<Beacon> beacons) {
+        Beacon firstBeacon = beacons.get(0);
+        UniqueBeaconId beaconId = new UniqueBeaconId(firstBeacon);
+        if (!this.beacons.containsKey(beaconId)) {
+            // new beacon
+            this.beacons.put(beaconId, firstBeacon);
+            // call provider
+        }
+    }
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
