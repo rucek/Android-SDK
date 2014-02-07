@@ -76,14 +76,7 @@ public class ListBeaconsActivity extends Activity {
   }
 
   private List<Beacon> filterBeacons(List<Beacon> beacons) {
-    List<Beacon> filteredBeacons = new ArrayList<Beacon>(beacons.size());
-    for (Beacon beacon : beacons) {
-      if (beacon.getProximityUUID().equalsIgnoreCase(ESTIMOTE_BEACON_PROXIMITY_UUID)
-          || beacon.getProximityUUID().equalsIgnoreCase(ESTIMOTE_IOS_PROXIMITY_UUID)) {
-        filteredBeacons.add(beacon);
-      }
-    }
-    return filteredBeacons;
+      return beacons;
   }
 
   @Override
