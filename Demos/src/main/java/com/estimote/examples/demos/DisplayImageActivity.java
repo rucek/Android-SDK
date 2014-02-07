@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.webkit.WebView;
 
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
 public class DisplayImageActivity extends Activity {
@@ -14,14 +15,15 @@ public class DisplayImageActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
         Bundle b = getIntent().getExtras();
-        String major = b.getString("major");
+        int major = b.getInt("major");
         new HttpRequestTask().execute(major);
     }
 
-    private class HttpRequestTask extends AsyncTask<String, Void, BeaconImage> {
+    private class HttpRequestTask extends AsyncTask<Integer, Void, BeaconImage> {
         @Override
-        protected BeaconImage doInBackground(String... params) {
+        protected BeaconImage doInBackground(Integer... params) {
             return restTemplate.getForObject("http://warski.org/gandalf/" + params[0] + ".json", BeaconImage.class);
         }
 
