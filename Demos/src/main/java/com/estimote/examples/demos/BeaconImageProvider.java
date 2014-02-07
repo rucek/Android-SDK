@@ -14,8 +14,7 @@ public class BeaconImageProvider {
     }
 
     public static String getBitmapForBeacon(Beacon beacon) {
-        BeaconImage beaconImage = restTemplate.getForObject("", BeaconImage.class);
+        BeaconImage beaconImage = restTemplate.getForObject("http://warski.org/gandalf/" + beacon.getMajor() + ".json", BeaconImage.class);
         return beaconImage.getUrl();
     }
-
 }
