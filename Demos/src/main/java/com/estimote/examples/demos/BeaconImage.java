@@ -4,7 +4,7 @@ public class BeaconImage {
 
     String name;
 
-    String url;
+    String pic;
 
     public String getName() {
         return name;
@@ -14,11 +14,11 @@ public class BeaconImage {
         this.name = name;
     }
 
-    public String getUrl() {
-        return url;
+    public String getPic() {
+        return pic;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setPic(String pic) {
+        this.pic = pic;
     }
 }
